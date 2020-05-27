@@ -25,18 +25,41 @@ const fs = require("fs");
 inquirer
   .prompt([
     // questions array
-    { type: "input", message: "What is the title of your Project?" },
-    { type: "input", message: "Enter a description" },
-    { type: "input", message: "Enter a table of contents" },
-    { type: "input", message: "How does a user install your project?" },
-    { type: "input", message: "What is the usage of your project?" },
-    { type: "input", message: "Licences" },
-    { type: "input", message: "Contributers" },
-    { type: "input", message: "Tests" },
-    { type: "input", message: "Questions" },
+    {
+      type: "input",
+      message: "What is the title of your Project?:",
+      name: "title",
+    },
+    { type: "input", message: "Enter a description:", name: "description" },
+    { type: "input", message: "Enter a table of contents:", name: "table" },
+    {
+      type: "input",
+      message: "How does a user install your project?:",
+      name: "install",
+    },
+    {
+      type: "input",
+      message: "What is the usage of your project?:",
+      name: "usage",
+    },
+    { type: "input", message: "Licences:", name: "licence" },
+    { type: "input", message: "Contributors:", name: "contributors" },
+    { type: "input", message: "Tests:", name: "test" },
+    { type: "input", message: "Questions:", name: "questions" },
   ])
   .then((answers) => {
     // Use user feedback for... whatever!!
+    console.log(
+      `Title: ${answers.title}\n`,
+      `Description: ${answers.description}\n`,
+      `Table of Contents: ${answers.table}\n`,
+      `Installation: ${answers.install}\n`,
+      `Usage: ${answers.usage}\n`,
+      `Licences: ${answers.licence}\n`,
+      `Contributors: ${answers.contributors}\n`,
+      `Tests: ${answers.test}\n`,
+      `Questions: ${answers.questions}\n`
+    );
   })
   .catch((error) => {
     if (error.isTtyError) {
