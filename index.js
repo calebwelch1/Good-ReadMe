@@ -48,8 +48,7 @@ inquirer
     { type: "input", message: "Questions:", name: "questions" },
   ])
   .then((answers) => {
-    // Use user feedback for... whatever!!
-    console.log(
+    newReadMe = [
       `Title: ${answers.title}\n`,
       `Description: ${answers.description}\n`,
       `Table of Contents: ${answers.table}\n`,
@@ -58,8 +57,14 @@ inquirer
       `Licences: ${answers.licence}\n`,
       `Contributors: ${answers.contributors}\n`,
       `Tests: ${answers.test}\n`,
-      `Questions: ${answers.questions}\n`
-    );
+      `Questions: ${answers.questions}\n`,
+    ];
+    fs.writeFile("ReadMe.md", newReadMe, (error) => {
+      if (error) {
+        console.error(error);
+      }
+      console.log("File saved successfully!");
+    });
   })
   .catch((error) => {
     if (error.isTtyError) {
