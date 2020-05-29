@@ -43,12 +43,32 @@ inquirer
       message: "What is the usage of your project?:",
       name: "usage",
     },
-    {type: "list", message:"Would you like to add images?", choices: [ "Yes", new inquirer.Separator(), "No"], name: "imgPrompt"},
+    {
+      type: "list",
+      message: "Would you like to add images?",
+      choices: ["Yes", new inquirer.Separator(), "No"],
+      name: "imgPrompt",
+    },
     // test yes and no
-    { type: "input" message:"What is the path to the image?", name:"imgPath", when: function(answers){return answers.imgPrompt == "yes" } },
-    //test if adding image works
+    {
+      type: "input",
+      message: "Enter a path to the images.(Seperate img paths by comma)",
+      name: "imgPath",
+      when: function (answers) {
+        return answers.imgPrompt === "Yes";
+      },
+    },
+    //test if adding image works x
     // test if add another image works
-    {type: "list", message:"Would you like to add another image?", choices:["Yes", new inquirer.Separator(), "No"] name:"imgAgain", when: function(answers){return answers.imgPath}}
+    // {
+    //   type: "list",
+    //   message: "Would you like to add more image?",
+    //   choices: ["Yes", new inquirer.Separator(), "No"],
+    //   name: "imgAgain",
+    //   when: function (answers) {
+    //     return answers.imgPath;
+    //   },
+    // },
     { type: "input", message: "Licences:", name: "licence" },
     { type: "input", message: "Contributors:", name: "contributors" },
     { type: "input", message: "Tests:", name: "test" },
@@ -56,6 +76,13 @@ inquirer
   ])
   .then((answers) => {
     // if I remove the commas it doesn't work but if I leave them in the readme prints with weird commmas before all of them.
+    function readMeImg() {
+      imgArr = answers.imgPath.split(",");
+      imgArr.forEach((img) => {
+        addGitImg = `![](${img})`;
+        newReadMe.splice(5, 0, addGitImg);
+      });
+    }
     newReadMe = [
       `Title: ${answers.title}\n`,
       `Description: ${answers.description}\n`,
@@ -67,6 +94,11 @@ inquirer
       `Tests: ${answers.test}\n`,
       `Questions: ${answers.questions}\n`,
     ];
+    readMeImg();
+    console.log(newReadMe);
+    // images come back as an array now we can use this array to dump images
+    // console.log(answers.imgPath.split(","));
+
     fs.writeFile("ReadMe.md", newReadMe, (error) => {
       if (error) {
         console.error(error);
