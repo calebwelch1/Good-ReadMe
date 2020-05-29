@@ -19,6 +19,7 @@
 
 // Include screenshots (or a video) of typical user flows through your application. This includes views of the prompts and the responses after their selection.
 
+//add github api for profile pic and link to repo
 const inquirer = require("inquirer");
 const fs = require("fs");
 
@@ -42,12 +43,19 @@ inquirer
       message: "What is the usage of your project?:",
       name: "usage",
     },
+    {type: "list", message:"Would you like to add images?", choices: [ "Yes", new inquirer.Separator(), "No"], name: "imgPrompt"},
+    // test yes and no
+    { type: "input" message:"What is the path to the image?", name:"imgPath", when: function(answers){return answers.imgPrompt == "yes" } },
+    //test if adding image works
+    // test if add another image works
+    {type: "list", message:"Would you like to add another image?", choices:["Yes", new inquirer.Separator(), "No"] name:"imgAgain", when: function(answers){return answers.imgPath}}
     { type: "input", message: "Licences:", name: "licence" },
     { type: "input", message: "Contributors:", name: "contributors" },
     { type: "input", message: "Tests:", name: "test" },
     { type: "input", message: "Questions:", name: "questions" },
   ])
   .then((answers) => {
+    // if I remove the commas it doesn't work but if I leave them in the readme prints with weird commmas before all of them.
     newReadMe = [
       `Title: ${answers.title}\n`,
       `Description: ${answers.description}\n`,
