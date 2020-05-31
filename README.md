@@ -3,7 +3,9 @@ Title:
 ,Table of Contents: 
 ,Installation: 
 ,Usage: 
-,![]( assets/sunny.jpg),![]( assets/rain.jpg),![](assets/sunny.jpg),Licences: 
+,Licenses: 
 ,Contributors: 
 ,Tests: 
 ,Questions: 
+,Email: @users.noreply.github.com
+,![](github.com/.png)
