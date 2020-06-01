@@ -36,7 +36,7 @@ inquirer
       message: "Enter a description for your project:",
       name: "description",
     },
-    { type: "input", message: "Enter a table of contents:", name: "table" },
+    // { type: "input", message: "Enter a table of contents:", name: "table" },
     {
       type: "input",
       message: "How does a user install your project?:",
@@ -124,13 +124,18 @@ inquirer
     newReadMe = [
       `Title: ${answers.title}\n`,
       `Description: ${answers.description}\n`,
-      `Table of Contents: ${answers.table}\n`,
-      `Installation: ${answers.install}\n`,
-      `Usage: ${answers.usage}\n`,
-      `Licenses: ${answers.license}\n`,
-      `Contributors: ${answers.contributors}\n`,
-      `Tests: ${answers.test}\n`,
-      `Questions: ${answers.questions}\n`,
+      `Table of Contents: \n
+      [Installation](#installation)\n
+      [Usage](#usage)\n
+      [Licenses](#licenses)\n
+      [Tests](#tests)\n
+      [Questions](#questions)\n`,
+      `### Installation: ${answers.install}\n`,
+      `### Usage: ${answers.usage}\n`,
+      `### Licenses: ${answers.license}\n`,
+      `### Contributors: ${answers.contributors}\n`,
+      `### Tests: ${answers.test}\n`,
+      `### Questions: ${answers.questions}\n`,
     ];
     readMeImg();
     addGit();
